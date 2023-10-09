@@ -42,6 +42,8 @@ class PaginationArrayImplementation extends AbstractFusionObject
         if ($displayRangeEnd + 1 < $numberOfPages) {
             $links[] = '...';
             $links[] = $numberOfPages;
+        } else if ($displayRangeEnd + 1 == $numberOfPages) {
+            $links[] = $numberOfPages;
         }
 
         if ($showPreviousNextLinks) {
