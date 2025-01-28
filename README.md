@@ -153,8 +153,8 @@ Filter nodes by properties of type reference or references.
 
 ## sortRecursiveByIndex
 
-Sort nodes recursively by their sorting property.
+Sort nodes by their position in the node tree. Please use with care, as this can become a very expensive operation, if you operate on bigger subtrees.
 
 Example:
 
-    ${q(site).find('[instanceof Neos.Neos:Document]').sortRecursiveByIndex('DESC').get()}
+    ${q(node).children("main").sortRecursiveByIndex('DESC').get()}

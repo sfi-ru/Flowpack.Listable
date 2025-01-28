@@ -3,6 +3,6 @@ prototype(Flowpack.Listable:ContentCaseShort) < prototype(Neos.Neos:ContentCase)
     default {
         @position = 'end'
         condition = true
-        type = ${q(node).property('_nodeType.name') + '.Short'}
+        type = ${node.nodeTypeName + '.Short'}
     }
 }

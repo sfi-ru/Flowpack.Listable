@@ -15,7 +15,7 @@ prototype(Flowpack.Listable:List) < prototype(Neos.Fusion:Component) {
         @if.listNotEmpty = ${props.list != null}
 
         attributes.class = ${props.wrapClass}
-        content = Neos.Fusion:Array {
+        content = Neos.Fusion:Join {
             listTitleTag = Neos.Fusion:Tag {
                 tagName = 'h2'
                 attributes.class = ${props.listTitleClass}

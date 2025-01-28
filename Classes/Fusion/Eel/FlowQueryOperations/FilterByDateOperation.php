@@ -1,15 +1,16 @@
 <?php
+
 namespace Flowpack\Listable\Fusion\Eel\FlowQueryOperations;
 
 /*                                                                        *
  * This script belongs to the Flow package "Flowpack.Listable".           *
  *                                                                        */
 
+use Neos\ContentRepository\Core\Projection\ContentGraph\Node;
 use Neos\Eel\FlowQuery\FlowQueryException;
 use Neos\Eel\FlowQuery\Operations\AbstractOperation;
 use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Annotations as Flow;
-use Neos\ContentRepository\Domain\Model\NodeInterface;
 
 /**
  * FlowQuery operation to filter Nodes by a date property
@@ -33,7 +34,7 @@ class FilterByDateOperation extends AbstractOperation
      */
     public function canEvaluate($context)
     {
-        return (!isset($context[0]) || ($context[0] instanceof NodeInterface));
+        return (!isset($context[0]) || ($context[0] instanceof Node));
     }
 
     /**
@@ -65,7 +66,7 @@ class FilterByDateOperation extends AbstractOperation
 
         $filteredNodes = [];
         foreach ($flowQuery->getContext() as $node) {
-            /** @var NodeInterface $node */
+            /** @var Node $node */
             $propertyValue = $node->getProperty($filterByPropertyPath);
             if (($compareOperator === '>' && $propertyValue > $date) || ($compareOperator === '<' && $propertyValue < $date)) {
                 $filteredNodes[] = $node;

@@ -1,6 +1,6 @@
 -
   name: 'Paginate for Flowpack.Listable'
-  uriPattern: '{node}<pageSeparator>{currentPage}<defaultUriSuffix>'
+  uriPattern: '{node}<pageSeparator>{currentPage}'
   defaults:
     '@package': 'Neos.Neos'
     '@controller': 'Frontend\Node'
@@ -8,5 +8,5 @@
     '@action': 'show'
   routeParts:
     node:
-      handler: Neos\Neos\Routing\FrontendNodeRoutePartHandlerInterface
+      handler: Neos\Neos\FrontendRouting\FrontendNodeRoutePartHandlerInterface
   appendExceedingArguments: TRUE

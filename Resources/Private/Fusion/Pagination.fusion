@@ -7,7 +7,7 @@ prototype(Flowpack.Listable:PaginationArray) {
     showPreviousNextLinks = false
 }
 
-prototype(Flowpack.Listable:PaginationParameters) < prototype(Neos.Fusion:RawArray)
+prototype(Flowpack.Listable:PaginationParameters) < prototype(Neos.Fusion:DataStructure)
 
 prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
     totalCount = 'to-be-set'
@@ -20,10 +20,10 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
     currentItemClass = 'isCurrent'
     currentPage = ${request.arguments.currentPage || 1}
 
-    renderer = Neos.Fusion:Collection {
+    renderer = Neos.Fusion:Loop {
         @if.paginationNeeded = ${(props.totalCount/props.itemsPerPage) > 1}
         @process.tmpl = ${'<ul class="' + props.class + '">' + value + '</ul>'}
-        collection = Flowpack.Listable:PaginationArray {
+        items = Flowpack.Listable:PaginationArray {
             currentPage = ${props.currentPage}
             maximumNumberOfLinks = ${props.maximumNumberOfLinks}
             totalCount = ${props.totalCount}

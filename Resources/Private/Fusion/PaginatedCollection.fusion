@@ -9,8 +9,8 @@ prototype(Flowpack.Listable:PaginatedCollection) < prototype(Neos.Fusion:Compone
     showPreviousNextLinks = false
     listRenderer = 'Flowpack.Listable:Collection'
 
-    renderer = Neos.Fusion:Array {
-        @context.data = Neos.Fusion:RawArray {
+    renderer = Neos.Fusion:Join {
+        @context.data = Neos.Fusion:DataStructure {
             collection = Neos.Fusion:Case {
                 @context.limit = ${props.currentPage * props.itemsPerPage}
                 @context.offset = ${(props.currentPage - 1) * props.itemsPerPage}
@@ -33,7 +33,7 @@ prototype(Flowpack.Listable:PaginatedCollection) < prototype(Neos.Fusion:Compone
 
         list = Neos.Fusion:Renderer {
             type = ${props.listRenderer}
-            element.collection = ${data.collection}
+            element.items = ${data.collection}
         }
         pagination = Flowpack.Listable:Pagination {
             currentPage = ${props.currentPage}
@@ -47,7 +47,7 @@ prototype(Flowpack.Listable:PaginatedCollection) < prototype(Neos.Fusion:Compone
     @cache {
         mode = 'dynamic'
         entryIdentifier {
-            node = ${node}
+            node = ${Neos.Caching.entryIdentifierForNode(node)}
         }
         entryDiscriminator = ${request.arguments.currentPage}
         context {

@@ -1,15 +1,16 @@
 <?php
+
 namespace Flowpack\Listable\Fusion\Eel\FlowQueryOperations;
 
 /*                                                                        *
  * This script belongs to the Flow package "Flowpack.Listable".           *
  *                                                                        */
 
+use Neos\ContentRepository\Core\Projection\ContentGraph\Node;
 use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Eel\FlowQuery\FlowQueryException;
 use Neos\Eel\FlowQuery\Operations\AbstractOperation;
 use Neos\Flow\Annotations as Flow;
-use Neos\ContentRepository\Domain\Model\NodeInterface;
 
 /**
  * FlowQuery operation to filter by properties of type reference or references
@@ -33,7 +34,7 @@ class FilterByReferenceOperation extends AbstractOperation
      */
     public function canEvaluate($context)
     {
-        return (!isset($context[0]) || ($context[0] instanceof NodeInterface));
+        return (!isset($context[0]) || ($context[0] instanceof Node));
     }
 
     /**
@@ -55,12 +56,12 @@ class FilterByReferenceOperation extends AbstractOperation
             throw new FlowQueryException('filterByReference() needs node reference by which nodes should be filtered', 1332493263);
         }
 
-        /** @var NodeInterface $nodeReference */
+        /** @var Node $nodeReference */
         list($filterByPropertyPath, $nodeReference) = $arguments;
 
         $filteredNodes = [];
         foreach ($flowQuery->getContext() as $node) {
-            /** @var NodeInterface $node */
+            /** @var Node $node */
             $propertyValue = $node->getProperty($filterByPropertyPath);
             if ($nodeReference == $propertyValue || (is_array($propertyValue) && in_array($nodeReference, $propertyValue, false))) {
                 $filteredNodes[] = $node;

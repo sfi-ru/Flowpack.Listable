@@ -7,7 +7,8 @@
     "description": "Tiny extension for listing things",
     "license": "MIT",
     "require": {
-        "neos/neos": "^3.3 || ^4.0 || ^5.0 || ^7.0 ||  ^8.0 || dev-master"
+        "php": ">=8.2",
+        "neos/neos": "^9.0"
     },
     "autoload": {
         "psr-4": {

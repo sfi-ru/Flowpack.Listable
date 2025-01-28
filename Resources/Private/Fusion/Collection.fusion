@@ -1,10 +1,10 @@
-prototype(Flowpack.Listable:Collection) < prototype(Neos.Fusion:Collection) {
+prototype(Flowpack.Listable:Collection) < prototype(Neos.Fusion:Loop) {
     listClass = ''
     itemClass = ''
     @context.itemClass = ${this.itemClass}
     @process.tmpl = ${'<ul class="' + this.listClass + '">' + value + '</ul>'}
 
-    collection = 'must-be-set'
+    items = 'must-be-set'
     itemName = 'node'
     iterationName = 'iteration'
     itemRenderer = Flowpack.Listable:ContentCaseShort
